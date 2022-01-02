@@ -8,7 +8,7 @@ namespace LinqPracticing
     {
         public static List<string> SelectPropertyName(List<MyObject> myObjects)
         {
-            return myObjects.Select(m => m.Name).ToList();
+            return myObjects.Select(o => o.Name).ToList();
         }
 
         public static MyObject GetFirst(List<MyObject> myObjects)
@@ -18,12 +18,12 @@ namespace LinqPracticing
 
         public static MyObject GetFirstWithCondition(List<MyObject> myObjects)
         {
-            return myObjects.First(m => m.Id == 1);
+            return myObjects.First(o => o.Id == 1);
         }
 
         public static MyObject GetFirstWithConditionException(List<MyObject> myObjects)
         {
-            return myObjects.First(m => m.Id == 13);
+            return myObjects.First(o => o.Id == 999);
         }
 
         public static MyObject GetFirstOrDefault(List<MyObject> myObjects)
@@ -33,22 +33,25 @@ namespace LinqPracticing
 
         public static MyObject GetFirstOrDefaultWithCondition(List<MyObject> myObjects)
         {
-            return myObjects.FirstOrDefault(m => m.Id == 1);
+            return myObjects.FirstOrDefault(o => o.Id == 1);
         }
 
         public static MyObject GetFirstOrDefaultConditionNull(List<MyObject> myObjects)
         {
-            return myObjects.FirstOrDefault(m => m.Id == 13);
+            return myObjects.FirstOrDefault(o => o.Id == 999);
         }
 
         public static List<MyObject> GetElementsWhereIdExist(List<MyObject> myObjects)
         {
-            return myObjects.Where(m => m.Id == 1).ToList();
+            return (List<MyObject>)myObjects.Where(o => o.Id == 1)
+                                            .Where(o => o.Id == 2);
+            //!
         }
 
         public static List<MyObject> GetElementsWhereIdNotExist(List<MyObject> myObjects)
         {
-            return myObjects.Where(m => m.Id == 13).ToList();
+            return (List<MyObject>)myObjects.Where(o => o.Id > 999);
+            //!
         }
 
         public static bool AnyElement(List<MyObject> myObjects)
@@ -58,51 +61,62 @@ namespace LinqPracticing
 
         public static bool AnyElementWithExistId(List<MyObject> myObjects)
         {
-            return myObjects.Any(m => m.Id == 1);
+            return myObjects.Any(o => o.Id == 1);
         }
 
         public static bool AnyElementWithNotExistId(List<MyObject> myObjects)
         {
-            return myObjects.Any(m => m.Id == 13);
+            return myObjects.Any(o => o.Id == 0);
         }
 
         public static List<MyObject> OrderList(List<MyObject> myObjects)
         {
-            return myObjects.OrderBy(m => m.Id).ToList();
+            throw new System.Exception("no");
+            //return myObjects.OrderBy(o => o.Name);
         }
         public static List<MyObject> OrderThenByList(List<MyObject> myObjects)
         {
-            return myObjects.OrderBy(m => m.Id).ThenBy(m => m.Name).ToList();
+            throw new System.Exception("no");
         }
 
         public static List<MyObject> TakeThreeElements(List<MyObject> myObjects)
         {
-            return myObjects.Take(3).ToList();
+            throw new System.Exception("no");
         }
 
         public static List<MyObject> TakeElementsWithCondition(List<MyObject> myObjects)
         {
-            return myObjects.TakeWhile(m => m.Id < 50).ToList();
+            return (List<MyObject>)myObjects.OrderByDescending(o => o).Take(3);
+            //!
         }
 
         public static List<IGrouping<int, MyObject>> GroupElements(List<MyObject> myObjects)
         {
-            return myObjects.GroupBy(m => m.Id).ToList();
+            return (List<IGrouping<int, MyObject>>)myObjects.GroupBy(o => o.Id);
+            //!
         }
 
         public static MyObject SingleElement(List<MyObject> myObjects)
         {
-            return myObjects.Single(m => m.Id == 2);
+            try
+            {
+               return myObjects.Single();
+            }
+            catch(System.InvalidOperationException)
+            {
+                return myObjects.First(o => o.Id == 2);
+            }
+           //!
         }
 
         public static MyObject SingleElementException(List<MyObject> myObjects)
         {
-            return myObjects.Single(m => m.Id == 1);
+            throw new System.Exception("no");
         }
 
         public static MyObject SingleElementException2(List<MyObject> myObjects)
         {
-            return myObjects.Single(m => m.Id == 13);
+            throw new System.Exception("no");
         }
     }
 }

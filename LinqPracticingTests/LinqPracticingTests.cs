@@ -17,8 +17,9 @@ namespace LinqPracticingTests
             new MyObject() {Id = 52, Name = "Tutu"},
             new MyObject() {Id = 8, Name = "Doe"},
             new MyObject() {Id = 14, Name = "NoName"},
-            new MyObject() {Id = 1, Name = "Flyn"},
+            new MyObject() {Id = 19, Name = "Flyn"},
         };
+
 
         /// <summary>
         /// Utiliser la méthode Select pour retourner une liste de propriété Name
