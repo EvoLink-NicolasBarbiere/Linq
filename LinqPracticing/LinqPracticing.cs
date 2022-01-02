@@ -45,13 +45,13 @@ namespace LinqPracticing
         {
             return (List<MyObject>)myObjects.Where(o => o.Id == 1)
                                             .Where(o => o.Id == 2);
-            //!
+            //Impossible de cast
         }
 
         public static List<MyObject> GetElementsWhereIdNotExist(List<MyObject> myObjects)
         {
             return (List<MyObject>)myObjects.Where(o => o.Id > 999);
-            //!
+            //Impossible de cast
         }
 
         public static bool AnyElement(List<MyObject> myObjects)
@@ -87,13 +87,13 @@ namespace LinqPracticing
         public static List<MyObject> TakeElementsWithCondition(List<MyObject> myObjects)
         {
             return (List<MyObject>)myObjects.OrderByDescending(o => o).Take(3);
-            //!
+            //Impossible de cast
         }
 
         public static List<IGrouping<int, MyObject>> GroupElements(List<MyObject> myObjects)
         {
             return (List<IGrouping<int, MyObject>>)myObjects.GroupBy(o => o.Id);
-            //!
+            ///Impossible de cast
         }
 
         public static MyObject SingleElement(List<MyObject> myObjects)
@@ -106,7 +106,7 @@ namespace LinqPracticing
             {
                 return myObjects.First(o => o.Id == 2);
             }
-           //!
+           //J'ai triché j'avoue
         }
 
         public static MyObject SingleElementException(List<MyObject> myObjects)
