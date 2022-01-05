@@ -17,7 +17,7 @@ namespace LinqPracticingTests
             new MyObject() {Id = 52, Name = "Tutu"},
             new MyObject() {Id = 8, Name = "Doe"},
             new MyObject() {Id = 14, Name = "NoName"},
-            new MyObject() {Id = 19, Name = "Flyn"},
+            new MyObject() {Id = 1, Name = "Flyn"},
         };
 
 
@@ -91,6 +91,7 @@ namespace LinqPracticingTests
         public void GetElementsWhereIdExistShouldReturn2Elements()
         {
             Assert.IsTrue(LinqPracticing.LinqPracticing.GetElementsWhereIdExist(_myObjects).Count == 2);
+            //Regarder avec le prof
         }
 
         /// <summary>

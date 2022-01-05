@@ -43,15 +43,12 @@ namespace LinqPracticing
 
         public static List<MyObject> GetElementsWhereIdExist(List<MyObject> myObjects)
         {
-            return (List<MyObject>)myObjects.Where(o => o.Id == 1)
-                                            .Where(o => o.Id == 2);
-            //Impossible de cast
+            return myObjects.Where(o => o.Id == 1).ToList();
         }
 
         public static List<MyObject> GetElementsWhereIdNotExist(List<MyObject> myObjects)
         {
-            return (List<MyObject>)myObjects.Where(o => o.Id > 999);
-            //Impossible de cast
+            return myObjects.Where(o => o.Id > 999).ToList();
         }
 
         public static bool AnyElement(List<MyObject> myObjects)
@@ -71,52 +68,48 @@ namespace LinqPracticing
 
         public static List<MyObject> OrderList(List<MyObject> myObjects)
         {
-            throw new System.Exception("no");
-            //return myObjects.OrderBy(o => o.Name);
+            return myObjects.OrderBy(o => o.Id).ToList();
         }
         public static List<MyObject> OrderThenByList(List<MyObject> myObjects)
         {
-            throw new System.Exception("no");
+            return myObjects.OrderBy(o => o.Id).ThenBy(o => o.Name).ToList();
         }
 
         public static List<MyObject> TakeThreeElements(List<MyObject> myObjects)
         {
-            throw new System.Exception("no");
+            return myObjects.OrderBy(o => o.ToString()).Take(3).ToList();
         }
 
         public static List<MyObject> TakeElementsWithCondition(List<MyObject> myObjects)
         {
-            return (List<MyObject>)myObjects.OrderByDescending(o => o).Take(3);
-            //Impossible de cast
+            return myObjects.OrderByDescending(o => o.ToString()).Take(3).ToList();
         }
 
         public static List<IGrouping<int, MyObject>> GroupElements(List<MyObject> myObjects)
         {
-            return (List<IGrouping<int, MyObject>>)myObjects.GroupBy(o => o.Id);
-            ///Impossible de cast
+            return myObjects.GroupBy(o => o.Id).ToList();
         }
 
         public static MyObject SingleElement(List<MyObject> myObjects)
         {
-            try
-            {
-               return myObjects.Single();
-            }
-            catch(System.InvalidOperationException)
-            {
-                return myObjects.First(o => o.Id == 2);
-            }
-           //J'ai triché j'avoue
+            return myObjects.Single(o => o.Name == "Test");
         }
 
         public static MyObject SingleElementException(List<MyObject> myObjects)
         {
-            throw new System.Exception("no");
+            return myObjects.SingleOrDefault();
         }
 
         public static MyObject SingleElementException2(List<MyObject> myObjects)
         {
-            throw new System.Exception("no");
+            try
+            {
+                return myObjects.Single(o => o.Name == "oof");
+            }
+            catch(System.InvalidOperationException)
+            {
+                return myObjects.SingleOrDefault();
+            }
         }
     }
 }
